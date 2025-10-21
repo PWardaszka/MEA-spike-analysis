@@ -12,13 +12,13 @@ def load_mea_data(filepath, save_cleaned=True):
     Returns:
         pd.DataFrame: Cleaned spike timestamps (µs), columns = electrodes
     """
-    # Pomijamy pierwsze 6 linii (metadane)
+    # skip 6 lines (metadata)
     df = pd.read_csv(filepath, skiprows=6)
 
-    # Usuwamy puste kolumny
+    # delete empty columns
     df.dropna(axis=1, how='all', inplace=True)
 
-    # Zapisz do data/processed, jeśli ustawione
+    # save to data/processed
     if save_cleaned:
         filename = os.path.basename(filepath)
         processed_path = os.path.join("data", "processed", filename)
